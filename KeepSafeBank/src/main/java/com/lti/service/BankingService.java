@@ -84,6 +84,8 @@ public interface BankingService {
 		
 		public Transaction addATransaction(int ToAcc ,int fromAcc ,double amt, String tmode);
 
+		int returnaccpwdfromcustId(int custId);
+
 	 
 
 }

@@ -23,7 +23,7 @@ public class Account {
 	
 	double accBal=10000;
 	String accType = "saving";
-	String accPwd; // transaction password + otp
+	int accPwd; // transaction password + otp
 
 	@ManyToOne
 	@JoinColumn(name = "cust_id")
@@ -69,13 +69,7 @@ public class Account {
 		this.accType = accType;
 	}
 
-	public String getAccPwd() {
-		return accPwd;
-	}
-
-	public void setAccPwd(String accPwd) {
-		this.accPwd = accPwd;
-	}
+	
 
 	public Customer getCustomer() {
 		return customer;
@@ -92,6 +86,14 @@ public class Account {
 
 	public void setTransaction(List<Transaction> transaction) {
 		this.transaction = transaction;
+	}
+
+	public int getAccPwd() {
+		return accPwd;
+	}
+
+	public void setAccPwd(int accPwd) {
+		this.accPwd = accPwd;
 	}
 	
 	

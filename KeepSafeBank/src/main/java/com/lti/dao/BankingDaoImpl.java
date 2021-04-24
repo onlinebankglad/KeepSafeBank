@@ -262,7 +262,7 @@ public class BankingDaoImpl implements BankingDao{
 	
 
 	@Transactional
-	public Transaction addATransaction(int ToAcc ,int fromAcc ,double amt, String tmode){
+	public Transaction addATransaction(int ToAcc ,int fromAcc ,double amt, String tmodes){
 
 		Account fromacc = deductAmountfromAccNO(fromAcc, amt);
 		Account toAcc  = addAmountToAccNO(ToAcc, amt);
@@ -271,7 +271,7 @@ public class BankingDaoImpl implements BankingDao{
               transaction1.setAccount(fromacc);
               transaction1.setToAccNO(toacc.getAccNo());
               transaction1.setAmount(amt);
-              transaction1.setTmodes(tmode);
+              transaction1.setTmodes(tmodes);
               transaction1.settDate(LocalDate.now());
              Transaction transaction2= em.merge(transaction1);
               return transaction2;
@@ -408,6 +408,17 @@ public int findBenAccFromBenId(int benId) {
 	
 }
 
+public int returnaccpwdfromcustId(int custId){
+    Customer cust=em.find(Customer.class,custId);
+    Account acc=null;
+    for(Account a:cust.getAccount()) {
+            acc=a;
+        }
+   
+    int Password =acc.getAccPwd();
+    return Password;
+   
+}
 
 
 }

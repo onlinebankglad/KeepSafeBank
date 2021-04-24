@@ -82,6 +82,8 @@ public interface BankingDao {
 	
 	public int findBenAccFromBenId(int benId);
 	
-	public List<Transaction> viewAllTransactionOfUser(int custID);	
+	public List<Transaction> viewAllTransactionOfUser(int custID);
+
+	int returnaccpwdfromcustId(int custId);	
 	
 }

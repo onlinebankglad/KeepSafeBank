@@ -2,6 +2,7 @@ package com.lti.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -97,8 +98,30 @@ public class BankingServiceImpl implements BankingService{
 	}
 
 	public Customer aprroveCustomerbyId(int custId) {
+		 Customer customer=bankingdao.aprroveCustomerbyId(custId);
+	        Account acc=null;
+	        for(Account a:customer.getAccount()) {
+	                acc=a;
+	            }
+	    
+	         Random rand = new Random(); //instance of random class
+	          int upperbound = 99999;
+	            //generate random values from 0-24
+	          int int_random = rand.nextInt(upperbound);
+	          if(int_random<10000) {
+	              int_random=int_random+1000;
+	          }
+	          acc.setAccPwd(int_random);
+	          System.out.println(acc.getAccNo());
+	          System.out.println(acc.getAccPwd());
+	          bankingdao.UpdateAccount(acc, custId);
+	        String subject="Registeration done";
+	        String text="Hi"+" "+ customer.getCustName()+"Your account is approved and this is your temporary transaction password"+" "+acc.getAccPwd();
+	        emailService.sendEmailForNewRegistration(customer.getEmailID(),text,subject);
+	        System.out.println("Mail sent");
+	        return customer;
 		// TODO Auto-generated method stub
-		return bankingdao.aprroveCustomerbyId(custId);
+//		return bankingdao.aprroveCustomerbyId(custId);
 	}
 
 	public List<Customer> unapprovedCustomerList() {
@@ -251,4 +274,7 @@ public class BankingServiceImpl implements BankingService{
 		// TODO Auto-generated method stub
 		return bankingdao.addATransaction(ToAcc, fromAcc, amt, tmode);
 	}
+	 public int returnaccpwdfromcustId(int custId) {
+	        return bankingdao.returnaccpwdfromcustId(custId);
+	    }
 }

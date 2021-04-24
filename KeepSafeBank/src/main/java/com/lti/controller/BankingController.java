@@ -160,7 +160,8 @@ public class BankingController {
 	}
 	@RequestMapping(value="/addTranscation",method=RequestMethod.POST)
 	public Transaction makeTransaction(@RequestBody TransactionDto tranDto){
-		return bankingservice.addATransaction(tranDto.getToAccNO(),tranDto.getFromacc_no(),tranDto.getAmount(), tranDto.getTmode());
+		System.out.println(tranDto.getTmodes());
+		return bankingservice.addATransaction(tranDto.getToAccNO(),tranDto.getFromacc_no(),tranDto.getAmount(), tranDto.getTmodes());
 	}
 	
 	
@@ -224,6 +225,7 @@ public class BankingController {
 	public Customer aprroveCustomerbyId(@RequestParam("custId") int custId) //pending
 	{
 		// TODO Auto-generated method stub
+		
 		return bankingservice.aprroveCustomerbyId(custId);
 	}
 	@RequestMapping(value = "/custmailbox", method = RequestMethod.POST)
@@ -344,5 +346,9 @@ public class BankingController {
     }
 
     
+    @RequestMapping(value = "/returnaccpwdfromcustId", method = RequestMethod.GET)// generate otp for forget password
+    public int returnaccpwdfromcustId(@RequestParam int custId){
+    	return bankingservice.returnaccpwdfromcustId(custId);
+    }
 
 }

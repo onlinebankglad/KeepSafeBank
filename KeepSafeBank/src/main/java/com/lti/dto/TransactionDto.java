@@ -6,11 +6,12 @@ public class TransactionDto {
 	double amount;
 	String tmodes;
 	
-	public String getTmode() {
+	
+	public String getTmodes() {
 		return tmodes;
 	}
-	public void setTmode(String tmode) {
-		this.tmodes = tmode;
+	public void setTmodes(String tmodes) {
+		this.tmodes = tmodes;
 	}
 	public int getFromacc_no() {
 		return fromacc_no;
