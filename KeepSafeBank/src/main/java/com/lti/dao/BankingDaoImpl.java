@@ -294,8 +294,14 @@ public class BankingDaoImpl implements BankingDao{
        
         TypedQuery<Transaction> query=em.createQuery(jqpl, Transaction.class);
         query.setParameter("accno", acc);
-       
+//       
         List<Transaction> bfcs=query.getResultList();
+//        for(Transaction t:bfcs) {
+//        	if(t.getToAccNO()==ac) {
+//        		t.settType("credit");
+//        		em.merge(t);
+//        	}
+//        }
         System.out.println("We are here");
         return bfcs;
     }
