@@ -86,4 +86,8 @@ public interface BankingDao {
 
 	int returnaccpwdfromcustId(int custId);	
 	
+	public void resetAccPassword(int custId, int Accpassword);
+
+	void resetAdminPassword(int adminId, String password);
+	
 }

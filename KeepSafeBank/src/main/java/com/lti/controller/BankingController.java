@@ -350,5 +350,14 @@ public class BankingController {
     public int returnaccpwdfromcustId(@RequestParam int custId){
     	return bankingservice.returnaccpwdfromcustId(custId);
     }
-
+    
+    @RequestMapping(value = "/resetAccPassword", method = RequestMethod.POST)
+    public void resetAccPassword(@RequestParam("custId") int custId, @RequestParam("accPwd")int accPwd){
+    	 bankingservice.resetAccPassword(custId, accPwd);
+    }
+    @RequestMapping(value = "/resetAdminPassword", method = RequestMethod.POST)
+    public void resetAdminPassword(@RequestBody AdminDto admindto  ) {
+        bankingservice.resetAdminPassword(admindto.getaId(),admindto.getaPwd());
+    
+    }
 }

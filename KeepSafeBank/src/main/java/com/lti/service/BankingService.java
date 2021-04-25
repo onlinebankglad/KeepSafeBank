@@ -23,7 +23,7 @@ public interface BankingService {
 	Account UpdateAccount(Account account, int custid);
 
 	Customer findCustomerById(int custId);
-	
+
 	Customer findCustomerIdbyAccNo(int AccNo);
 
 	void addAnAdmin(Admin admin);
@@ -35,13 +35,12 @@ public interface BankingService {
 	List<Beneficary> findBeneficaryAccountByNo(int accNo);
 
 	List<Account> viewAllAccounts();
+
 	List<Customer> viewAllCustomers();
 
-
 	Customer aprroveCustomerbyId(int custId);
-	
-	Customer unaprroveCustomerbyId(int custId);
 
+	Customer unaprroveCustomerbyId(int custId);
 
 	List<Customer> unapprovedCustomerList();
 
@@ -51,41 +50,41 @@ public interface BankingService {
 
 	List<Account> findAccountsByCustId(int custId);
 
-
 	Account addAmountToAccNO(int accNo, double amount);
 
 	Account deductAmountfromAccNO(int accNo, double amount);
 
-
 	List<Transaction> viewAllTransactionByDate(LocalDate date);
 
 	List<Beneficary> viewAllBeneficaryofUser(int i);
-	
 
 	void register(Customer customer);
 
 	Customer login(String email, String password);
-	
+
 	Customer get(int id);
 
 	void update(Customer customer);
+
+	public void contactus(CustomerMailBox pcustomer);
+
+	public int generateotp(int cusid);
+
+	public int generateotpforforgetId(int accNO);
+
+	public void resetPassword(int custId, String password);
+
+	public int findBenAccFromBenId(int benId);
+
+	public List<Transaction> viewAllTransactionOfUser(int custID);
+
+	public Transaction addATransaction(int ToAcc, int fromAcc, double amt, String tmode);
+
+	int returnaccpwdfromcustId(int custId);
+
+	public void resetAccPassword(int custId, int Accpassword);
+	 public void resetAdminPassword(int AdminId, String password);
 	
-	 public void contactus(CustomerMailBox pcustomer);
-	 
-	 public int generateotp(int cusid); 
-	 
-	 public int generateotpforforgetId(int accNO);
-	 
-	 public void resetPassword(int custId, String password);
-	 
-	 public int findBenAccFromBenId(int benId);
-	 
-		public List<Transaction> viewAllTransactionOfUser(int custID);
-		
-		public Transaction addATransaction(int ToAcc ,int fromAcc ,double amt, String tmode);
-
-		int returnaccpwdfromcustId(int custId);
-
 	 
 
 }
