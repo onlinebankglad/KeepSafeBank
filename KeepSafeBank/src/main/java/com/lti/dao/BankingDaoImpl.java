@@ -25,7 +25,6 @@ import com.lti.model.Admin;
 import com.lti.model.Beneficary;
 import com.lti.model.Customer;
 import com.lti.model.CustomerMailBox;
-import com.lti.model.Tmodes;
 import com.lti.model.Transaction;
 
 @Repository
@@ -338,14 +337,15 @@ public class BankingDaoImpl implements BankingDao {
 	}
 
 	@Override
+	@Transactional
 	public Customer unaprroveCustomerbyId(int custId) {
 		// TODO Auto-generated method stub
 		Customer customer = findCustomerById(custId);
-		customer.setApproved(false);
+		//customer.setApproved(false);
 		return addorUpdateCustomer(customer);
 	}
 
-//---------------------------Risky------------------------------
+
 	public int Generateotp() {
 		Random rand = new Random(); // instance of random class
 		int upperbound = 200;
@@ -400,9 +400,7 @@ public class BankingDaoImpl implements BankingDao {
 	  
 	   
 	    Admin admin=em.find(Admin.class, AdminId);
-	    System.out.println("in daoooo");
 	    admin.setaPwd(password);
-	    System.out.println("in 2 daoooo");
 
 	    em.merge(admin);
 	}

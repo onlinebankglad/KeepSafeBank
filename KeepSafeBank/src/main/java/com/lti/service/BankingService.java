@@ -86,6 +86,8 @@ public interface BankingService {
 	 public void resetAdminPassword(int AdminId, String password);
 
 	Customer updatecustomer(Customer cust);
+
+	int providecustIdViaMail(int accNo);
 	
 	 
 

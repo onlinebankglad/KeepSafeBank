@@ -45,9 +45,9 @@ public class BankingServiceImpl implements BankingService {
 
 	public void contactus(CustomerMailBox pcustomer) {
 		bankingdao.contactusmailbox(pcustomer);
-		String subject = "Thankyou for contacting us";
-		String text = "Hi" + pcustomer.getName()
-				+ "Our team will soon reach to you and these are the details of schemes you requested";
+		String subject = "Thank you for contacting us";
+		String text = "Hi" + " "+pcustomer.getName()
+				+ "Our team will soon reach to you and keep you posted about new features and schemes.";
 		emailService.sendEmailForNewRegistration(pcustomer.getEmail(), text, subject);
 		System.out.println("Mail sent");
 	}
@@ -169,7 +169,7 @@ public class BankingServiceImpl implements BankingService {
 		if (!bankingdao.isCustomerPresent(customer.getEmailID())) {
 			bankingdao.save(customer);
 			String subject = "Registeration done";
-			String text = "Hi" + customer.getCustName() + "You have successfully registered ";
+			String text = "Hi" + " "+customer.getCustName() + "You have successfully registered ";
 			emailService.sendEmailForNewRegistration(customer.getEmailID(), subject, text);
 			System.out.println("Mail sent");
 		} else
@@ -208,6 +208,12 @@ public class BankingServiceImpl implements BankingService {
 	@Override
 	public Customer unaprroveCustomerbyId(int custId) {
 		// TODO Auto-generated method stub
+		Customer c = bankingdao.findCustomerById(custId);
+		String subject = "Unsuccessful Registeration";
+		String text = "Hi" + " " + c.getCustName() + "please register again with proper details";
+		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
+		System.out.println("Mail sent");
+	
 		return bankingdao.unaprroveCustomerbyId(custId);
 	}
 
@@ -229,7 +235,7 @@ public class BankingServiceImpl implements BankingService {
 		Customer c = bankingdao.findCustomerById(acc.getCustomer().getCustId());
 		int otp = bankingdao.Generateotp();
 		String subject = "OTP";
-		String text = "Hi" + " " + c.getCustName() + "this is your customer id" + c.getCustId();
+		String text = "Hi" + " " + c.getCustName() +" "+"your otp is"+otp;
 		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
 		System.out.println("Mail sent");
 		return otp;
@@ -274,7 +280,7 @@ public class BankingServiceImpl implements BankingService {
 		bankingdao.resetAccPassword(custId, Accpassword);
 		Customer c = bankingdao.findCustomerById(custId);
 		String subject = "transaction password reset";
-		String text = "Hi" + c.getCustName() + "Your transaction password has been changed ";
+		String text = "Hi" + " "+c.getCustName() + "Your transaction password has been changed ";
 		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
 		System.out.println("Mail sent");
 	}
@@ -285,4 +291,12 @@ public class BankingServiceImpl implements BankingService {
 	 public Customer updatecustomer(Customer cust) {
 	        return bankingdao.addorUpdateCustomer(cust);
 	    }
+	public int providecustIdViaMail(int accNo){
+		Customer c= findCustomerIdbyAccNo(accNo);
+		String subject = "CustId";
+		String text = "Hi" + " "+c.getCustName() + "Your requested custId is "+c.getCustId();
+		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
+		System.out.println("Mail sent");
+		return c.getCustId();
+	 }
 }

@@ -329,6 +329,11 @@ public class BankingController {
     public int generateotpforforgetId(@RequestParam ("accNo") int accNO) {
          return bankingservice.generateotpforforgetId(accNO);
     }
+    @RequestMapping(value = "/providecustIdViaMail", method = RequestMethod.POST)
+    public int providecustIdViaMail(@RequestParam ("accNo")int accNo) {
+    	
+    	return bankingservice.providecustIdViaMail(accNo);
+    			}
    
     @RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
     public void resetPassword(@RequestParam ("custId")int custId,@RequestParam ("loginPassword")  String password) {
