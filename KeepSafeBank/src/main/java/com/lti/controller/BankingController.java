@@ -26,6 +26,7 @@ import com.lti.dto.CustomerLoginDto;
 import com.lti.dto.DocDto;
 import com.lti.dto.Status;
 import com.lti.dto.TransactionDto;
+import com.lti.dto.UpdatecustDto;
 import com.lti.dto.Status.StatusType;
 import com.lti.exception.CustomerServiceException;
 import com.lti.model.Account;
@@ -359,5 +360,31 @@ public class BankingController {
     public void resetAdminPassword(@RequestBody AdminDto admindto  ) {
         bankingservice.resetAdminPassword(admindto.getaId(),admindto.getaPwd());
     
+    }
+    
+    @RequestMapping(value="/updatecust", method= RequestMethod.POST)
+    public Customer UpdateCustomer(@RequestBody UpdatecustDto dto) {
+        System.out.println(dto.getCustId());
+        Customer cust=findCustomerById(dto.getCustId());
+       
+        System.out.println(dto.getCustId());
+        //cust.setAadhar(DocDto.);
+       
+        cust.setCustAge(dto.getCustAge());
+        cust.setParentsName(dto.getParentsName());
+        cust.setCustName(dto.getCustName());
+        cust.setPermanentAddress(dto.getPermanentAddress());
+        cust.setResidentialAddress(dto.getResidentialAddress());
+        cust.setPanno(dto.getPanno());
+        cust.setAadharno(dto.getAadharno());
+        cust.setMobileNumber(dto.getMobileNumber());
+        cust.setEmailID(dto.getEmailID());
+        cust.setLoginPassword(dto.getLoginPassword());
+        cust.setState(dto.getState());
+        cust.setCity(dto.getCity());
+        cust.setPinCode(dto.getPinCode());
+           
+        return bankingservice.updatecustomer(cust);   
+       
     }
 }

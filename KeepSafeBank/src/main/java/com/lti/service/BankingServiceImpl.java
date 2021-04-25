@@ -282,4 +282,7 @@ public class BankingServiceImpl implements BankingService {
 	 public void resetAdminPassword(int AdminId, String password) {
          bankingdao.resetAdminPassword(AdminId, password);
      }
+	 public Customer updatecustomer(Customer cust) {
+	        return bankingdao.addorUpdateCustomer(cust);
+	    }
 }
