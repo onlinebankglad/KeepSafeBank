@@ -262,7 +262,7 @@ public class BankingDaoImpl implements BankingDao {
 		}
 		int ac = acc.getAccNo();
 		System.out.println(ac);
-		String jqpl = "select t from Transaction t where to_accno=:accno or fromacc_no=:accno order by tDate desc";
+		String jqpl = "select t from Transaction t where to_accno=:accno or fromacc_no=:accno order by transId desc";
 
 		TypedQuery<Transaction> query = em.createQuery(jqpl, Transaction.class);
 		query.setParameter("accno", acc);

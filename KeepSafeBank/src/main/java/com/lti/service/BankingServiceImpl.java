@@ -35,7 +35,7 @@ public class BankingServiceImpl implements BankingService {
 		if (!bankingdao.isCustomerPresent(customer.getEmailID())) {
 			cust = bankingdao.addorUpdateCustomer(customer);
 			String subject = "Registeration done :). Please wait for approval of account and credentials.";
-			String text = "Hi" + " " + customer.getCustName() + "You have successfully registered!";
+			String text = "Hi" + " " + customer.getCustName() + " "+"You have successfully registered!";
 			emailService.sendEmailForNewRegistration(customer.getEmailID(), text, subject);
 			System.out.println("Mail sent");
 			return cust;
@@ -115,8 +115,9 @@ public class BankingServiceImpl implements BankingService {
 		System.out.println(acc.getAccPwd());
 		bankingdao.UpdateAccount(acc, custId);
 		String subject = "Registeration done";
-		String text = "Hi" + " " + customer.getCustName()
-				+ "Your account is approved and this is your temporary transaction password" + " " + acc.getAccPwd();
+		String text = "Hi" + " " + customer.getCustName()+" "+"this is your Customer ID"+" "+custId+
+			"."+ "Your account is approved and this is your account number and temporary transaction password" + " "+acc.getAccNo()+ " " + acc.getAccPwd()
+			+".";
 		emailService.sendEmailForNewRegistration(customer.getEmailID(), text, subject);
 		System.out.println("Mail sent");
 		return customer;
@@ -222,7 +223,7 @@ public class BankingServiceImpl implements BankingService {
 		Customer c = bankingdao.findCustomerById(cusid);
 		int otp = bankingdao.Generateotp();
 		String subject = "OTP";
-		String text = "Hi" + " " + c.getCustId() + "this is your generated otp " + otp;
+		String text = "Hi" + " " + c.getCustId() + "this is your generated otp " + " "+otp;
 		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
 		System.out.println("Mail sent");
 		return otp;
@@ -235,7 +236,7 @@ public class BankingServiceImpl implements BankingService {
 		Customer c = bankingdao.findCustomerById(acc.getCustomer().getCustId());
 		int otp = bankingdao.Generateotp();
 		String subject = "OTP";
-		String text = "Hi" + " " + c.getCustName() +" "+"your otp is"+otp;
+		String text = "Hi" + " " + c.getCustName() +" "+"your otp is"+ " "+otp;
 		emailService.sendEmailForNewRegistration(c.getEmailID(), text, subject);
 		System.out.println("Mail sent");
 		return otp;
